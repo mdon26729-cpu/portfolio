@@ -340,31 +340,23 @@ function ProjectDetailPage({ slug }) {
     nutrivixea: {
       title: 'NutriVixea Wellness',
       subtitle: 'A premium digital experience for a wholesome food and wellness brand.',
-      intro: 'I wanted to create a modern digital experience around wholesome everyday food choices, where the products, ingredients and brand story could be presented in a simple and visually engaging way.',
-      sections: [
-        ['Brand Concept', 'Premium, warm and approachable wellness storytelling built around natural ingredients and everyday healthy habits.'],
-        ['Product Story', 'Highlighting the balance between nourishment, taste and a calm, thoughtful lifestyle.'],
-        ['Website Experience', 'Designing a clear shopping journey and visual brand language that feels refined but easy to trust.'],
-      ],
+      intro: 'I wanted to create NutriVixea for people with busy schedules who still want to make healthier food choices and meet their everyday nutritional needs. The idea was to offer wholesome, convenient options that make it easier to add essential nutrients to a busy lifestyle without compromising on taste or simplicity.',
       gallery: [
         {
-          type: 'image',
           src: nutrivixeaPack03,
           alt: 'NutriVixea Almond Cranberry Granola Mix box, 450 g',
           title: 'Almond Cranberry Granola Mix',
           description:
-            'Crunchy oats, almonds and tangy dried cranberries, a nutty and wholesome start to your morning. Enjoy with milk, yogurt or honey.',
+            'Crunchy oats, almonds and tangy dried cranberries make a nutty, wholesome start to your morning. Enjoy with milk, yogurt or honey.',
         },
         {
-          type: 'image',
           src: nutrivixeaPack02,
           alt: 'NutriVixea Chocolate Hazelnut Granola Mix box, 450 g',
           title: 'Chocolate Hazelnut Granola Mix',
           description:
-            'Rich chocolate pieces and roasted hazelnuts with oats and seeds, for a little indulgence in a wholesome bowl.',
+            'Rich chocolate pieces and roasted hazelnuts come together with oats and seeds for a little indulgence in a wholesome bowl.',
         },
         {
-          type: 'image',
           src: nutrivixeaPack01,
           alt: 'NutriVixea Mixed 5 Bars box, 250 g',
           title: 'Mixed 5 Bars',
@@ -372,7 +364,6 @@ function ProjectDetailPage({ slug }) {
             'Five flavours in one box: Almond Cranberry, Chocolate Hazelnut, Oats & Seeds, Coconut Almond and Dark Chocolate. Natural energy for on-the-go days.',
         },
         {
-          type: 'image',
           src: nutrivixeaBars,
           alt: 'Five NutriVixea wrapped granola bars beside a Small Bars Big Wellness card',
           title: 'Granola Bars',
@@ -380,9 +371,6 @@ function ProjectDetailPage({ slug }) {
             'Small bars, big wellness. Made with nuts, fruits and seeds in earthy, beautifully wrapped flavours.',
         },
       ],
-      actionLabel: 'View Brand Story',
-      actionUrl: '#',
-      kind: 'mixed',
     },
   }
 
@@ -405,37 +393,35 @@ function ProjectDetailPage({ slug }) {
     )
   }
 
-  const projectGallery = (
-    <div className={`project-gallery-grid${slug === 'nutrivixea' ? ' nutrivixea-product-grid' : ''}`}>
-      {project.gallery.map((item, index) => {
-        if (slug === 'nutrivixea') {
-          return (
-            <article className="nutrivixea-product-card" key={`${slug}-product-${index}`}>
-              <div className="nutrivixea-product-image">
-                <img src={item.src} alt={item.alt} loading="lazy" />
-              </div>
-              <div className="nutrivixea-product-copy">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </article>
-          )
-        }
-
-        return item.type === 'video' ? (
-          <video
-            key={`${slug}-video-${index}`}
-            controls
-            className="project-video"
-            preload="metadata"
-            playsInline
-            src={item.src}
-            aria-label={item.alt}
-          />
-        ) : (
-          <img key={`${slug}-image-${index}`} src={item.src} alt={item.alt} loading="lazy" />
-        )
-      })}
+  const projectGallery = slug === 'nutrivixea' ? (
+    <div className="nutrivixea-product-grid" aria-label="NutriVixea products">
+      {project.gallery.map((item) => (
+        <article className="nutrivixea-product-card" key={item.title}>
+          <div className="nutrivixea-product-image">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </div>
+          <div className="nutrivixea-product-copy">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div className="project-gallery-grid">
+      {project.gallery.map((item, index) => item.type === 'video' ? (
+        <video
+          key={`${slug}-video-${index}`}
+          controls
+          className="project-video"
+          preload="metadata"
+          playsInline
+          src={item.src}
+          aria-label={item.alt}
+        />
+      ) : (
+        <img key={`${slug}-image-${index}`} src={item.src} alt={item.alt} loading="lazy" />
+      ))}
     </div>
   )
 
@@ -446,7 +432,7 @@ function ProjectDetailPage({ slug }) {
         <p>{project.intro}</p>
       </div>
 
-      {project.sections.length > 0 ? (
+      {project.sections?.length > 0 ? (
         <div className="project-section-grid">
           {project.sections.map(([title, text]) => (
             <article key={title} className="project-info-card">
@@ -458,6 +444,21 @@ function ProjectDetailPage({ slug }) {
       ) : null}
     </>
   )
+
+  const nutrivixeaShowcase = slug === 'nutrivixea' ? (
+    <section className="project-story-block project-story-block--nutrivixea" aria-labelledby="nutrivixea-story-heading">
+      <p className="detail-label" id="nutrivixea-story-heading">Why I Built It</p>
+      <p>{project.intro}</p>
+      <a
+        className="primary-btn"
+        href={projectLinks.instagram}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Order on Instagram →
+      </a>
+    </section>
+  ) : null
 
   return (
     <AppShell compact>
@@ -473,9 +474,9 @@ function ProjectDetailPage({ slug }) {
           </div>
 
           {projectGallery}
-          {projectDescription}
+          {slug === 'nutrivixea' ? nutrivixeaShowcase : projectDescription}
 
-          {project.actionUrl && project.actionUrl !== '#' ? (
+          {slug !== 'nutrivixea' && project.actionUrl ? (
             <div className="project-actions">
               <a href={project.actionUrl} className="primary-btn" target="_blank" rel="noreferrer">
                 {project.actionLabel}
