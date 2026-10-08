@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import './App.css'
 import nourivaMainVideo from './assets/videos/nouriva-main.mp4'
 import homeHeroImage from './assets/images/ayeza-home-hero.png'
@@ -65,11 +65,6 @@ const featuredProjects = [
 ]
 
 function AppShell({ children, compact = false }) {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  const menuToggleRef = useRef(null)
-  const navRef = useRef(null)
-  const headerRef = useRef(null)
-
   useEffect(() => {
     const revealElements = document.querySelectorAll(
       'main > section, .why-card, .project-preview-card, .project-story-block, .project-info-card, .project-gallery-grid > *',
@@ -102,98 +97,19 @@ function AppShell({ children, compact = false }) {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    if (!mobileNavOpen) return undefined
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
-    const focusFrame = window.requestAnimationFrame(() => {
-      navRef.current?.querySelector('a')?.focus()
-    })
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setMobileNavOpen(false)
-        menuToggleRef.current?.focus()
-        return
-      }
-
-      if (event.key !== 'Tab') return
-
-      const menuLinks = navRef.current?.querySelectorAll('a') ?? []
-      const firstMenuLink = menuLinks[0]
-      const lastMenuLink = menuLinks[menuLinks.length - 1]
-
-      if (event.shiftKey && document.activeElement === firstMenuLink) {
-        event.preventDefault()
-        lastMenuLink?.focus()
-      } else if (!event.shiftKey && document.activeElement === lastMenuLink) {
-        event.preventDefault()
-        firstMenuLink?.focus()
-      }
-    }
-
-    const handlePointerDown = (event) => {
-      if (!headerRef.current?.contains(event.target)) {
-        setMobileNavOpen(false)
-      }
-    }
-
-    const handleResize = () => {
-      if (window.innerWidth > 760) {
-        setMobileNavOpen(false)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    document.addEventListener('pointerdown', handlePointerDown)
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      document.body.style.overflow = previousOverflow
-      document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('pointerdown', handlePointerDown)
-      window.removeEventListener('resize', handleResize)
-      window.cancelAnimationFrame(focusFrame)
-    }
-  }, [mobileNavOpen])
-
   return (
     <div className="portfolio-shell">
-      <header className="site-header" ref={headerRef}>
+      <header className="site-header">
         <div className="container nav-wrap">
           <Link to="/" className="brand" aria-label="Ayeza home">
             <span className="brand-mark">A</span>
             <span className="brand-text">AYEZA</span>
           </Link>
 
-          <button
-            type="button"
-            className="menu-toggle"
-            ref={menuToggleRef}
-            aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={mobileNavOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setMobileNavOpen((open) => !open)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-
-          <nav
-            id="primary-navigation"
-            className={`site-nav ${mobileNavOpen ? 'open' : ''}`}
-            ref={navRef}
-            aria-label="Main navigation"
-            aria-hidden={!mobileNavOpen && window.matchMedia('(max-width: 760px)').matches}
-            inert={!mobileNavOpen && window.matchMedia('(max-width: 760px)').matches}
-          >
+          <nav className="site-nav" aria-label="Main navigation">
             <Link
               to="/"
               onClick={() => {
-                setMobileNavOpen(false)
                 if (window.location.pathname === '/') {
                   window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
                 }
@@ -201,10 +117,10 @@ function AppShell({ children, compact = false }) {
             >
               Home
             </Link>
-            <a href="/#work" onClick={() => setMobileNavOpen(false)}>
+            <a href="/#work">
               Work
             </a>
-            <a href="/#contact" onClick={() => setMobileNavOpen(false)}>
+            <a href="/#contact">
               Contact
             </a>
           </nav>
@@ -260,7 +176,7 @@ function HomePage() {
       <section id="home" className="hero-section section-spacing">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">DIETITIAN • DEVELOPER • HEALTH &amp; WELLNESS</p>
+            <p className="eyebrow">DIETITIAN &amp; WELLNESS COACH</p>
             <h1>
               Beyond Nutrition Advice.
               <span>Building <em>Practical</em> Health Solutions.</span>
@@ -278,7 +194,7 @@ function HomePage() {
               </a>
             </div>
 
-            <div className="credibility-line">Nutrition • Digital Products • Wellness</div>
+            <div className="credibility-line">NUTRITION GUIDANCE • WELLNESS SOLUTIONS</div>
           </div>
 
           <div className="hero-visual" aria-label="Ayeza in her wellness workspace">
