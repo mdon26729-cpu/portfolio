@@ -324,12 +324,8 @@ function ProjectDetailPage({ slug }) {
     nouriva: {
       title: 'Nouriva Health & Fitness',
       subtitle: 'A digital wellness experience focused on practical nutrition and everyday health management.',
-      intro: 'I wanted to create a simple wellness experience that brings nutrition tracking, meal planning and everyday wellness tools together in one place.',
-      sections: [
-        ['The Idea', 'Build a more approachable wellness platform centred around everyday routines and healthy decision-making.'],
-        ['The Problem', 'Nutrition tools often feel complicated or disconnected from real-life habits and consistency.'],
-        ['The Solution', 'Design a guided, supportive digital experience that simplifies wellness planning and daily progress.'],
-      ],
+      intro: 'I created Nouriva to make nutrition and everyday wellness easier to understand and manage. I wanted to bring meal planning, nutrition tracking, and simple wellness tools together in one supportive digital experience.',
+      sections: [],
       gallery: [
         {
           type: 'video',
@@ -445,19 +441,21 @@ function ProjectDetailPage({ slug }) {
 
   const projectDescription = (
     <>
-      <div className="project-story-block">
+      <div className={`project-story-block${slug === 'nouriva' ? ' project-story-block--nouriva' : ''}`}>
         <p className="detail-label">Why I Built It</p>
         <p>{project.intro}</p>
       </div>
 
-      <div className="project-section-grid">
-        {project.sections.map(([title, text]) => (
-          <article key={title} className="project-info-card">
-            <p className="detail-label">{title}</p>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
+      {project.sections.length > 0 ? (
+        <div className="project-section-grid">
+          {project.sections.map(([title, text]) => (
+            <article key={title} className="project-info-card">
+              <p className="detail-label">{title}</p>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      ) : null}
     </>
   )
 
