@@ -41,7 +41,7 @@ const featuredProjects = [
     title: 'Nouriva Health & Fitness',
     category: 'Wellness Platform',
     description:
-      'A wellness platform designed to make everyday nutrition tracking, meal planning and healthy routines more practical and accessible.',
+      'A wellness platform designed to make nutrition tracking, meal planning, and healthy routines simpler and more accessible.',
     reason: 'To make daily nutrition easier.',
     visual: nourivaMainVideo,
     imageAlt: 'Nouriva wellness planning with a nutrition app, food and notes',
@@ -54,7 +54,7 @@ const featuredProjects = [
     title: 'NutriVixea Wellness',
     category: 'Premium Wellness Brand',
     description:
-      'A premium digital experience for a wholesome food and wellness brand.',
+      'A modern wellness brand created to make wholesome, convenient nutrition easier for busy everyday lifestyles.',
     reason: 'To make wholesome shopping easier.',
     visual: nutrivixeaHomePreview,
     imageAlt: 'NutriVixea granola bars with oats, nuts, seeds and dried fruit',
@@ -176,13 +176,13 @@ function HomePage() {
       <section id="home" className="hero-section section-spacing">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">DIETITIAN &amp; WELLNESS COACH</p>
+            <p className="eyebrow">DIETITIAN • WELLNESS • DIGITAL PRODUCT BUILDER</p>
             <h1>
               Beyond Nutrition Advice.
               <span>Building <em>Practical</em> Health Solutions.</span>
             </h1>
             <p className="hero-text">
-              I combine my background in nutrition with technology to create practical digital experiences for health, wellness and everyday living.
+              I combine my background in nutrition with technology to build practical digital experiences that make health, wellness, and everyday living simpler.
             </p>
 
             <div className="cta-row">
@@ -194,19 +194,21 @@ function HomePage() {
               </a>
             </div>
 
-            <div className="credibility-line">NUTRITION GUIDANCE • WELLNESS SOLUTIONS</div>
+            <div className="credibility-line">Health • Wellness • Digital Experiences</div>
           </div>
 
           <div className="hero-visual" aria-label="Ayeza in her wellness workspace">
             <div className="hero-card">
               <img src={homeHeroImage} alt="Ayeza seated with nutrition planning materials" />
-              <div className="hero-badge">Nutrition • Web • Wellness</div>
             </div>
+            <span className="hero-float-badge hero-float-badge--nutrition">🌿 Nutrition × Technology</span>
+            <span className="hero-float-badge hero-float-badge--purpose">✦ Building With Purpose</span>
           </div>
         </div>
       </section>
 
       <section className="section-spacing story-section">
+        <p className="hero-transition-note">Where health knowledge meets thoughtful technology.</p>
         <div className="container story-layout">
           <div className="section-header">
             <p className="eyebrow">MY STORY</p>
@@ -218,7 +220,7 @@ function HomePage() {
               My background in Human Nutrition &amp; Dietetics showed me how important simple, practical health choices can be in everyday life. I became interested in using technology to turn those ideas into digital experiences that people can actually use.
             </p>
             <p>
-              That led me to explore digital product building and create projects that combine my understanding of nutrition with technology, design and practical user experiences.
+              That led me to explore digital product building and create practical solutions by combining my understanding of nutrition, technology, design, and user needs.
             </p>
           </div>
 
@@ -250,7 +252,7 @@ function HomePage() {
           <div className="section-header center">
             <p className="eyebrow">SELECTED WORK</p>
             <h2>Projects Built With Purpose</h2>
-            <p className="section-subtitle">Each project started with an idea, a problem or an experience I wanted to make better.</p>
+            <p className="section-subtitle">Each project starts with a real idea, problem, or opportunity to create something more useful.</p>
           </div>
 
           <div className="featured-projects">
@@ -340,7 +342,7 @@ function ProjectDetailPage({ slug }) {
     nutrivixea: {
       title: 'NutriVixea Wellness',
       subtitle: 'A premium digital experience for a wholesome food and wellness brand.',
-      intro: 'I wanted to create NutriVixea for people with busy schedules who still want to make healthier food choices and meet their everyday nutritional needs. The idea was to offer wholesome, convenient options that make it easier to add essential nutrients to a busy lifestyle without compromising on taste or simplicity.',
+      intro: 'I wanted to create NutriVixea for people with busy schedules who still want to make healthier food choices and meet their everyday nutritional needs.',
       gallery: [
         {
           src: nutrivixeaPack03,
